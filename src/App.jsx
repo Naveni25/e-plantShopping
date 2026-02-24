@@ -21,29 +21,11 @@ function App() {
     setShowProductList(false);
   };
   return (
-    <Router>
+        <Router>
       <Routes>
         <Route
           path="/"
           element={
-            <div className="landing-page">
-              <div className="landing-content">
-                <h1>Paradise Nursery</h1>
-                <button className="get-started-btn">
-                  Get Started
-                </button>
-              </div>
-            </div>
-          }
-        />
-        <Route path="/plants" element={<ProductList />} />
-        <Route path="/cart" element={<CartItem />} />
-      </Routes>
-    </Router>
-  );
-}
-
-export default App;
     <div className="app-container">
       <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
         <div className="background-image"></div>
@@ -67,6 +49,11 @@ export default App;
         <ProductList onHomeClick={handleHomeClick}/>
       </div>
     </div>
+                      />
+        <Route path="/plants" element={<ProductList />} />
+        <Route path="/cart" element={<CartItem />} />
+      </Routes>
+    </Router>
   );
 }
 
