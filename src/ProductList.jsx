@@ -1,10 +1,53 @@
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+    import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/CartSlice";
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
+const totalQuantity = useSelector(state => state.cart.totalQuantity);
+const plants = [
+  { id: 1, name: "Snake Plant", price: 10, category: "Indoor", image: "https://via.placeholder.com/150" },
+  { id: 2, name: "Peace Lily", price: 12, category: "Indoor", image: "https://via.placeholder.com/150" },
+  { id: 3, name: "Aloe Vera", price: 8, category: "Indoor", image: "https://via.placeholder.com/150" },
+  { id: 4, name: "Spider Plant", price: 9, category: "Indoor", image: "https://via.placeholder.com/150" },
+  { id: 5, name: "ZZ Plant", price: 15, category: "Indoor", image: "https://via.placeholder.com/150" },
+  { id: 6, name: "Fern", price: 11, category: "Indoor", image: "https://via.placeholder.com/150" },
 
+  { id: 7, name: "Rose", price: 5, category: "Outdoor", image: "https://via.placeholder.com/150" },
+  { id: 8, name: "Tulip", price: 6, category: "Outdoor", image: "https://via.placeholder.com/150" },
+  { id: 9, name: "Lavender", price: 7, category: "Outdoor", image: "https://via.placeholder.com/150" },
+  { id: 10, name: "Basil", price: 4, category: "Medicinal", image: "https://via.placeholder.com/150" },
+  { id: 11, name: "Mint", price: 3, category: "Medicinal", image: "https://via.placeholder.com/150" },
+  { id: 12, name: "Neem", price: 9, category: "Medicinal", image: "https://via.placeholder.com/150" }
+];
+
+
+const dispatch = useDispatch();
+
+{plants.map(plant => (
+  <div key={plant.id}>
+    <img src={plant.image} alt={plant.name} />
+    <h3>{plant.name}</h3>
+    <p>${plant.price}</p>
+    <button onClick={() => dispatch(addToCart(plant))}>
+      Add to Cart
+    </button>
+  </div>
+))}
+    const cartItems = useSelector(state => state.cart.items);
+
+const isInCart = id =>
+  cartItems.some(item => item.id === id);
+    <button
+  disabled={isInCart(plant.id)}
+  onClick={() => dispatch(addToCart(plant))}
+>
+  {isInCart(plant.id) ? "Added" : "Add to Cart"}
+</button>
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -266,6 +309,11 @@ function ProductList({ onHomeClick }) {
                         </a>
                     </div>
 
+<nav style={{ background: "green", padding: "10px" }}>
+  <Link to="/">Home</Link> | 
+  <Link to="/plants">Plants</Link> | 
+  <Link to="/cart">Cart ({totalQuantity})</Link>
+</nav>
                 </div>
                 <div style={styleObjUl}>
                     <div> <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>
