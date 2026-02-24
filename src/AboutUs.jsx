@@ -3,6 +3,17 @@ import './AboutUs.css';
 
 function AboutUs() {
   return (
+    <div className="about">
+      <h1>About Paradise Nursery</h1>
+      <p>
+        Paradise Nursery is an online plant shop that provides high-quality
+        indoor and outdoor plants to enhance your home environment.
+      </p>
+      <p>
+        Our mission is to bring nature closer to people through affordable
+        and beautiful houseplants.
+      </p>
+    </div>
     <div className="about-us-container">
       {/* <h1 className="about-us-heading">About Us</h1> */}
       <p className="about-us-description">Welcome to Paradise Nursery, where green meets serenity!</p>
